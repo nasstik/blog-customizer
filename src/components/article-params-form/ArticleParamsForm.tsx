@@ -5,9 +5,10 @@ import styles from './ArticleParamsForm.module.scss';
 
 import { Select } from 'src/ui/select/Select';
 import { RadioGroup } from 'src/ui/radio-group/RadioGroup';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import type { OptionType } from 'src/constants/articleProps';
 import clsx from 'clsx';
+import { useOutsideClickClose } from 'src/ui/select/hooks/useOutsideClickClose';
 
 import {
 	fontFamilyOptions,
@@ -32,6 +33,14 @@ export const ArticleParamsForm = ({
 }: ArticleParamsFormProps) => {
 	const [formState, setFormState] = useState<ArticleStateType>(initialState);
 	const [isPanelOpen, setIsPanelOpen] = useState(false);
+	const formRef = useRef<HTMLDivElement>(null);
+
+	useOutsideClickClose({
+		isOpen: isPanelOpen,
+		rootRef: formRef,
+		onClose: () => setIsPanelOpen(false),
+		onChange: setIsPanelOpen,
+	});
 
 	const handleFontChange = (option: OptionType) =>
 		setFormState({ ...formState, fontFamilyOption: option });
@@ -51,6 +60,7 @@ export const ArticleParamsForm = ({
 	const handleApply = () => {
 		console.log('Применены настройки:', formState);
 		onApply(formState);
+		setIsPanelOpen(false);
 	};
 
 	const handleReset = () => {
@@ -66,6 +76,7 @@ export const ArticleParamsForm = ({
 			/>
 			{isPanelOpen && (
 				<aside
+					ref={formRef}
 					className={clsx(styles.container, {
 						[styles.container_open]: isPanelOpen,
 					})}>
