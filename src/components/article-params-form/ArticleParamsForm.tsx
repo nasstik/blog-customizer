@@ -74,57 +74,55 @@ export const ArticleParamsForm = ({
 				isOpen={isPanelOpen}
 				onClick={() => setIsPanelOpen(!isPanelOpen)}
 			/>
-			{isPanelOpen && (
-				<aside
-					ref={formRef}
-					className={clsx(styles.container, {
-						[styles.container_open]: isPanelOpen,
-					})}>
-					<form
-						className={styles.form}
-						onSubmit={(e) => {
-							e.preventDefault();
-							handleApply();
-						}}>
-						<Select
-							title='Шрифт'
-							options={fontFamilyOptions}
-							selected={formState.fontFamilyOption}
-							onChange={handleFontChange}
-							placeholder='Выберите шрифт'
-						/>
-						<RadioGroup
-							name='fontSize'
-							title='Размер шрифта'
-							options={fontSizeOptions}
-							selected={formState.fontSizeOption}
-							onChange={handleFontSizeChange}
-						/>
-						<Select
-							title='Цвет шрифта'
-							options={fontColors}
-							selected={formState.fontColor}
-							onChange={handleFontColorChange}
-						/>
-						<Select
-							title='Цвет фона'
-							options={backgroundColors}
-							selected={formState.backgroundColor}
-							onChange={handleBgColorChange}
-						/>
-						<Select
-							title='Ширина контента'
-							options={contentWidthArr}
-							selected={formState.contentWidth}
-							onChange={handleWidthChange}
-						/>
-						<div className={styles.bottomContainer}>
-							<Button title='Сбросить' type='clear' onClick={handleReset} />
-							<Button title='Применить' type='apply' onClick={handleApply} />
-						</div>
-					</form>
-				</aside>
-			)}
+			<aside
+				ref={formRef}
+				className={clsx(styles.container, {
+					[styles.container_open]: isPanelOpen,
+				})}>
+				<form
+					className={styles.form}
+					onSubmit={(e) => {
+						e.preventDefault();
+						handleApply();
+					}}>
+					<Select
+						title='Шрифт'
+						options={fontFamilyOptions}
+						selected={formState.fontFamilyOption}
+						onChange={handleFontChange}
+						placeholder='Выберите шрифт'
+					/>
+					<RadioGroup
+						name='fontSize'
+						title='Размер шрифта'
+						options={fontSizeOptions}
+						selected={formState.fontSizeOption}
+						onChange={handleFontSizeChange}
+					/>
+					<Select
+						title='Цвет шрифта'
+						options={fontColors}
+						selected={formState.fontColor}
+						onChange={handleFontColorChange}
+					/>
+					<Select
+						title='Цвет фона'
+						options={backgroundColors}
+						selected={formState.backgroundColor}
+						onChange={handleBgColorChange}
+					/>
+					<Select
+						title='Ширина контента'
+						options={contentWidthArr}
+						selected={formState.contentWidth}
+						onChange={handleWidthChange}
+					/>
+					<div className={styles.bottomContainer}>
+						<Button title='Сбросить' type='clear' onClick={handleReset} />
+						<Button title='Применить' type='apply' onClick={handleApply} />
+					</div>
+				</form>
+			</aside>
 		</>
 	);
 };
